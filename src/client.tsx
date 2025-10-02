@@ -176,7 +176,7 @@ function App() {
               <datalist id="country-codes">
                 {suggestions.map((c) => {
                   const label = `${c.name} (${c.dial_code})`;
-                  return <option value={label}></option>;
+                  return <option value={c.dial_code}>{label}</option>;
                 })}
               </datalist>
             </div>
