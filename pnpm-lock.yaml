@@ -31,7 +31,7 @@ importers:
         specifier: ^0.5.1
         version: 0.5.1
       wrangler:
-        specifier: ^4.17.0
+        specifier: ^4.40.3
         version: 4.40.3
 
 packages:
