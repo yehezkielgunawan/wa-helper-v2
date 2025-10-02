@@ -1,18 +1,21 @@
-import { Hono } from 'hono'
-import { renderer } from './renderer'
-import { Script } from 'vite-ssr-components/hono'
+import { Hono } from "hono";
+import { renderer } from "./renderer";
+import { Script } from "vite-ssr-components/hono";
+import { Footer } from "./components/Footer";
 
-const app = new Hono()
+const app = new Hono();
 
-app.use(renderer)
+app.use(renderer);
 
-const Home = () => {
+export const Home = () => {
   return (
     <main class="min-h-dvh bg-gray-50 text-gray-900">
       <div class="mx-auto max-w-screen-sm px-4 py-10">
         <div class="mb-6 text-center">
           <h1 class="text-3xl font-semibold tracking-tight">WhatsApp Helper</h1>
-          <p class="mt-2 text-sm text-gray-600">Quickly open a chat with prefilled number and message.</p>
+          <p class="mt-2 text-sm text-gray-600">
+            Quickly open a chat with prefilled number and message.
+          </p>
         </div>
 
         {/* Client app mounts here */}
@@ -21,10 +24,11 @@ const Home = () => {
         {/* Client script handled by vite-ssr-components for dev/prod */}
         <Script src="/src/client.tsx" />
       </div>
+      <Footer />
     </main>
-  )
-}
+  );
+};
 
-app.get('/', (c) => c.render(<Home />))
+app.get("/", (c) => c.render(<Home />));
 
-export default app
+export default app;

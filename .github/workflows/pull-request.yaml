@@ -1,14 +1,11 @@
-name: Deploy to Cloudflare Workers (Hono)
+name: Build and Unit Test
 
 on:
-  workflow_dispatch:
-
-concurrency:
-  group: cloudflare-deploy
-  cancel-in-progress: true
+  pull_request:
+    branches: [main]
 
 jobs:
-  deploy:
+  build-and-test:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -33,14 +30,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # Build production bundle (Vite) before deploying (mirrors pnpm cf:deploy)
       - name: Build (Vite)
         run: pnpm build
 
-      - name: Deploy to Cloudflare Workers
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: "4.40.3"
-          command: deploy --name wa-helper-v2 --minify
+      - name: Run Unit Tests
+        run: pnpm test:ci
