@@ -1,5 +1,5 @@
-import { jsxRenderer } from 'hono/jsx-renderer'
-import { Link, ViteClient } from 'vite-ssr-components/hono'
+import { jsxRenderer } from "hono/jsx-renderer";
+import { Link, ViteClient } from "vite-ssr-components/hono";
 
 export const renderer = jsxRenderer(({ children }) => {
   return (
@@ -14,10 +14,72 @@ export const renderer = jsxRenderer(({ children }) => {
         />
         <link rel="canonical" href="https://wa.yehezgun.com/" />
         <meta name="theme-color" content="#10b981" />
+        <link rel="manifest" href="/manifest.json" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="72x72"
+          href="/images/icons/icon-72x72.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="96x96"
+          href="/images/icons/icon-96x96.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="128x128"
+          href="/images/icons/icon-128x128.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="144x144"
+          href="/images/icons/icon-144x144.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="152x152"
+          href="/images/icons/icon-152x152.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="192x192"
+          href="/images/icons/icon-192x192.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="384x384"
+          href="/images/icons/icon-384x384.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="512x512"
+          href="/images/icons/icon-512x512.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="192x192"
+          href="/images/icons/icon-192x192.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="512x512"
+          href="/images/icons/icon-512x512.png"
+        />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="WA Helper — Open WhatsApp without saving contacts" />
+        <meta
+          property="og:title"
+          content="WA Helper — Open WhatsApp without saving contacts"
+        />
         <meta
           property="og:description"
           content="A web app to save your time by directly chat without saving the phone number first."
@@ -31,7 +93,10 @@ export const renderer = jsxRenderer(({ children }) => {
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="WA Helper — Open WhatsApp without saving contacts" />
+        <meta
+          name="twitter:title"
+          content="WA Helper — Open WhatsApp without saving contacts"
+        />
         <meta
           name="twitter:description"
           content="A web app to save your time by directly chat without saving the phone number first."
@@ -45,5 +110,5 @@ export const renderer = jsxRenderer(({ children }) => {
       </head>
       <body class="bg-gray-50 antialiased font-sans">{children}</body>
     </html>
-  )
-})
+  );
+});
