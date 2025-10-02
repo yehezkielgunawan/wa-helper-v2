@@ -7,7 +7,7 @@ const app = new Hono();
 
 app.use(renderer);
 
-const Home = () => {
+export const Home = () => {
   return (
     <main class="min-h-dvh bg-gray-50 text-gray-900">
       <div class="mx-auto max-w-screen-sm px-4 py-10">

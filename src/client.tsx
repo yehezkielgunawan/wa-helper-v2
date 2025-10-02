@@ -1,62 +1,14 @@
 import { createRoot } from "hono/jsx/dom/client";
 import { useEffect, useMemo, useState } from "hono/jsx/dom";
+import {
+  COUNTRY_DB_URL,
+  buildWaUrl,
+  normalizePhone,
+  resolveDialCode,
+  type CountryCodeEntry,
+} from "./utils/wa";
 
-// Types based on API shape
-interface CountryCodeEntry {
-  code: string; // e.g. "ID"
-  name: string; // e.g. "Indonesia"
-  dial_code: string; // e.g. "+62"
-}
-
-function normalizePhone(input: string): string {
-  const digits = input.replace(/\D/g, "");
-  return digits;
-}
-
-function buildWaUrl(phoneNumber: string, message: string | undefined): string {
-  const base = `https://wa.me/${phoneNumber}`;
-  if (message && message.trim().length > 0) {
-    const q = new URLSearchParams({ text: message }).toString();
-    return `${base}?${q}`;
-  }
-  return base;
-}
-
-// Data source and helpers
-const COUNTRY_DB_URL =
-  "https://raw.githubusercontent.com/yehezkielgunawan/country-call-code/main/db.json";
-
-function resolveDialCode(
-  query: string,
-  countries: CountryCodeEntry[],
-  fallback: string,
-): string {
-  const v = query.trim();
-  if (!v) return fallback;
-
-  // 1) Exact label match "Country (+62)"
-  const byLabel = countries.find((c) => `${c.name} (${c.dial_code})` === v);
-  if (byLabel) return byLabel.dial_code;
-
-  // 2) Exact country name or alpha-2 code
-  const lower = v.toLowerCase();
-  const byNameOrCode = countries.find(
-    (c) => c.name.toLowerCase() === lower || c.code.toLowerCase() === lower,
-  );
-  if (byNameOrCode) return byNameOrCode.dial_code;
-
-  // 3) Dial code input (with or without '+')
-  const normalized = v.startsWith("+") ? v : `+${v}`;
-  const byDial = countries.find(
-    (c) => c.dial_code === normalized || c.dial_code.replace("+", "") === v,
-  );
-  if (byDial) return byDial.dial_code;
-
-  // 4) Looks like a dial code; accept as-is
-  if (/^\+?\d{1,4}$/.test(v)) return normalized;
-
-  return fallback;
-}
+// Types now imported from utils
 
 function App() {
   const [allCountries, setAllCountries] = useState<CountryCodeEntry[]>([]);
@@ -176,7 +128,7 @@ function App() {
               <datalist id="country-codes">
                 {suggestions.map((c) => {
                   const label = `${c.name} (${c.dial_code})`;
-                  return <option value={c.dial_code}>{label}</option>;
+                  return <option value={label}></option>;
                 })}
               </datalist>
             </div>
