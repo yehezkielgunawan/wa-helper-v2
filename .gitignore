@@ -34,3 +34,5 @@ lerna-debug.log*
 .DS_Store
 
 AGENTS.md
+coverage/
+.nyc_output/
